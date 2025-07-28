@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36221.1 d17.14
+VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{75B6DA1B-6727-4490-A8B1-40DC2F1A1A91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basic Calculator", "Calculator\Basic Calculator.csproj", "{75B6DA1B-6727-4490-A8B1-40DC2F1A1A91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Refactored Calculator", "C:\Users\IXRet\Desktop\Calculator\Calculator\Refactored Calculator.csproj", "{390DAB2F-58EB-4ED4-8226-7AEE0B8EBD76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{75B6DA1B-6727-4490-A8B1-40DC2F1A1A91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75B6DA1B-6727-4490-A8B1-40DC2F1A1A91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{75B6DA1B-6727-4490-A8B1-40DC2F1A1A91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{390DAB2F-58EB-4ED4-8226-7AEE0B8EBD76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{390DAB2F-58EB-4ED4-8226-7AEE0B8EBD76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{390DAB2F-58EB-4ED4-8226-7AEE0B8EBD76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{390DAB2F-58EB-4ED4-8226-7AEE0B8EBD76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
