@@ -12,14 +12,14 @@ using System.Windows.Forms;
 namespace Calculator
 {
 
-    public partial class Calculator : Form
+    public partial class BasicCalculator : Form
     {
         private string left, right, op;
         private bool operatorSet = false; // To keep track of whether we are dealing with the left or right
         private bool decimalSet = false; // To keep track of whether a decimal has already been used
         private List<string> equation_history = new List<string>();
 
-        public Calculator(string left, string right, string op)
+        public BasicCalculator(string left, string right, string op)
         {
             InitializeComponent();
             setLeft(left);

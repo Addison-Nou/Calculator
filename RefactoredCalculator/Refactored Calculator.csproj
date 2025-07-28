@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{75B6DA1B-6727-4490-A8B1-40DC2F1A1A91}</ProjectGuid>
+    <ProjectGuid>{390DAB2F-58EB-4ED4-8226-7AEE0B8EBD76}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Calculator</RootNamespace>
     <AssemblyName>Calculator</AssemblyName>
@@ -46,16 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BasicCalculator.cs">
+    <Compile Include="RefactoredCalculator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BasicCalculator.Designer.cs">
-      <DependentUpon>BasicCalculator.cs</DependentUpon>
+    <Compile Include="RefactoredCalculator.Designer.cs">
+      <DependentUpon>RefactoredCalculator.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BasicCalculator.resx">
-      <DependentUpon>BasicCalculator.cs</DependentUpon>
+    <EmbeddedResource Include="RefactoredCalculator.resx">
+      <DependentUpon>RefactoredCalculator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

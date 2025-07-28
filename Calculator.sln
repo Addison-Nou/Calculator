@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.36221.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basic Calculator", "Calculator\Basic Calculator.csproj", "{75B6DA1B-6727-4490-A8B1-40DC2F1A1A91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Refactored Calculator", "C:\Users\IXRet\Desktop\Calculator\Calculator\Refactored Calculator.csproj", "{390DAB2F-58EB-4ED4-8226-7AEE0B8EBD76}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Refactored Calculator", "RefactoredCalculator\Refactored Calculator.csproj", "{390DAB2F-58EB-4ED4-8226-7AEE0B8EBD76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
