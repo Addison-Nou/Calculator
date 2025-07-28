@@ -18,7 +18,6 @@ namespace Calculator
         private bool operatorSet = false; // To keep track of whether we are dealing with the left or right
         private bool decimalSet = false; // To keep track of whether a decimal has already been used
         private List<string> equation_history = new List<string>();
-        private List<TextBox> history_textbox_list = new List<TextBox>();
 
         public Calculator(string left, string right, string op)
         {
@@ -102,7 +101,7 @@ namespace Calculator
             }
             catch (ArgumentOutOfRangeException) {
 
-                Console.Write("Error IndexOutOfRange: Equation history index given is out of range");
+                //Console.Write("Equation history index given is out of range");
                 return null;
             }
         }
@@ -134,6 +133,7 @@ namespace Calculator
                 equation_textbox.TextAlign = HorizontalAlignment.Right;
                 equation_textbox.Size = new System.Drawing.Size(200, 50);
                 equation_textbox.Location = new System.Drawing.Point(0, 30*i);
+                equation_textbox.ReadOnly = true;
                 panel_history.Controls.Add(equation_textbox);
             }
         }
