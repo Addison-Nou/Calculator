@@ -33,7 +33,7 @@ namespace Calculator
         private List<string> shuntingRPNCalc(string input)
         {
 
-            // Regex to validate the input
+            // Regex to validate the input - unnecessary for the UI but I've decided to include it for safety
             string regex = @"^\s*-?(?:\d+(\.\d*)?|\.\d+)(\s*[\+\-\*/]\s*-?(?:\d+(\.\d*)?|\.\d+))*\s*$";
 
             if (!Regex.IsMatch(input, regex))
@@ -59,46 +59,35 @@ namespace Calculator
             for (int i = 0; i < input.Length; i++)
             {
                 char c = input[i];
-                Console.WriteLine("Current character: " + c);
 
                 // If the character is part of a number then keep going
                 if (char.IsDigit(c) || c == '.')
                 {
                     token += c;
-                    Console.WriteLine("Current token: " + c);
+                    continue;
                 }
-                else if (operator_precedence.ContainsKey(c.ToString())) // If the character is an operator
+
+                if (string.IsNullOrEmpty(token)) { continue; } // If the current token is empty, skip
+
+                // If current token is not empty (indicating that the previous token was a number), add it to the output queue
+                output_queue.Add(token);
+
+                while (operator_stack.Count > 0 && operator_precedence[operator_stack.Peek()] >= operator_precedence[c.ToString()])
                 {
-                    // If current token is not empty (indicating that the previous token was a number), add it to the output queue
-                    if (!string.IsNullOrEmpty(token))
-                    {
-                        output_queue.Add(token);
-                        Console.WriteLine("Current token: " + token + " is a number, adding to output");
-
-                        while (operator_stack.Count > 0 && operator_precedence[operator_stack.Peek()] >= operator_precedence[c.ToString()])
-                        {
-                            // Pop operators from the stack to the output queue
-                            output_queue.Add(operator_stack.Pop());
-                            Console.WriteLine("Operator popped from stack to output queue: " + output_queue.Last());
-                        }
-
-                        operator_stack.Push(c.ToString());
-                        token = "";
-                        Console.WriteLine("Operator added to stack: " + c.ToString());
-                        Console.WriteLine("Peek Value: " + operator_precedence[operator_stack.Peek()]);
-                        Console.WriteLine("Operator Precedence Value: " + operator_precedence[c.ToString()]);
-                    }
+                    // Pop operators from the stack to the output queue
+                    output_queue.Add(operator_stack.Pop());
                 }
+
+                operator_stack.Push(c.ToString());
+                token = "";
+
             }
 
             // Add the remaining token and operators to the output queue
             output_queue.Add(token);
-            Console.WriteLine("Final token added to output queue: " + token);
-            Console.WriteLine("Operator stack count: " + operator_stack.Count);
 
             for (int j = operator_stack.Count - 1; j >= 0; j--)
             {
-                Console.WriteLine("Operator Stack item added to output queue: " + operator_stack.Peek());
                 output_queue.Add(operator_stack.Pop());
             }
 
@@ -165,7 +154,8 @@ namespace Calculator
             {
                 return calculationHistory[index];
             }
-            catch (ArgumentOutOfRangeException) {
+            catch (ArgumentOutOfRangeException)
+            {
 
                 Console.WriteLine("Equation history index given is out of range");
                 return null;
@@ -175,11 +165,11 @@ namespace Calculator
         private void addToHistory(string result)
         {
 
-            this.calculationHistory.Insert(0, new Tuple<string, string>(input, result)); // Insert the equation and result at the start of the history
+            calculationHistory.Insert(0, new Tuple<string, string>(input, result)); // Insert the equation and result at the start of the history
 
-            if (this.calculationHistory.Count > 10)
+            if (calculationHistory.Count > 10)
             {
-                this.calculationHistory.RemoveAt(10);
+                calculationHistory.RemoveAt(10);
             }
 
             // Nuke the panel history and generate new ones
@@ -212,7 +202,7 @@ namespace Calculator
 
         private void number_button_clicked(object sender, EventArgs e) // If a number button is clicked, update the left or right
         {
-            // Cast the sender to a button so I can grab the 'Text' attribute
+            // Cast the sender to a button to grab the 'Text' attribute
             Button clickedButton = (Button)sender;
 
             if (input == "0") {
@@ -223,24 +213,19 @@ namespace Calculator
             input += clickedButton.Text;
             textBox_result.Text = input;
             operatorSet = false;
-            Console.WriteLine ("Input: " + input);
         }
 
         private void decimal_button_clicked(Object sender, EventArgs e)
         {
-            // Cast the sender to a button so I can grab the 'Text' attribute
+            // Cast the sender to a button to grab the 'Text' attribute
             Button clickedButton = (Button)sender;
-
-            //if (this.input == "0") { textBox_result.Text = ""; }
 
             if (decimalSet == false)
             {
                 input += clickedButton.Text;
                 decimalSet = true;
                 textBox_result.Text = input;
-                Console.WriteLine("Input: " + input);
             }
-            
         }
 
         private void operator_button_clicked(object sender, EventArgs e)
@@ -248,17 +233,16 @@ namespace Calculator
             Button clickedButton = (Button)sender;
 
             // If operator has not been set
-            if (this.operatorSet == false)
+            if (operatorSet == false)
             {
                 input += clickedButton.Text;
                 textBox_result.Text = input;
-                this.decimalSet = false;
-                this.operatorSet = true;
+                decimalSet = false;
+                operatorSet = true;
             }
             else //Operator has already been set so change it to the newly clicked operator
             {
                 input = input.TrimEnd(input[input.Length - 1]) + clickedButton.Text; // Replace the last operator with the new operator
-                Console.WriteLine("Replacing last operator in input: " + input);
                 textBox_result.Text = input;
             }
         }
@@ -266,15 +250,13 @@ namespace Calculator
         private void equals_button_clicked(object sender, EventArgs e)
         {
             // If the equals button is clicked and there is a valid equation, calculate the result and clear the equation
-
             string result;
 
             try
             {
-                if (!(input == "0" || input == ""))
+                if (input != "0" && input != "")
                 {
                     List<string> tokens = shuntingRPNCalc(input);
-                    //Console.WriteLine("Tokens: " + string.Join(", ", tokens));
                     result = Calculate(tokens).ToString();
                     addToHistory(result);
                     textBox_result.Text = result;
@@ -283,14 +265,11 @@ namespace Calculator
             catch (Exception ex)
             {
                 textBox_result.Text = ex.Message;
-                return;
             }
             finally
             {
                 clearEquation();
             }
-
-            //Console.Write("History Index at 0: " + getPreviousResult(0));
         }
 
         private void clear_button_clicked(Object sender, EventArgs e)
