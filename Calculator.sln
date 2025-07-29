@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactoredCalculator", "Ref
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RefactoredCalculator.Test", "RefactoredCalculator.Test\RefactoredCalculator.Test.csproj", "{EFC4A67A-1075-411F-9E19-D3634FC4B751}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicCalculator.Test", "BasicCalculator.Test\BasicCalculator.Test.csproj", "{B0555C97-63C3-4CA6-A1BD-4C86BC526B3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EFC4A67A-1075-411F-9E19-D3634FC4B751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFC4A67A-1075-411F-9E19-D3634FC4B751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFC4A67A-1075-411F-9E19-D3634FC4B751}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0555C97-63C3-4CA6-A1BD-4C86BC526B3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0555C97-63C3-4CA6-A1BD-4C86BC526B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0555C97-63C3-4CA6-A1BD-4C86BC526B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0555C97-63C3-4CA6-A1BD-4C86BC526B3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

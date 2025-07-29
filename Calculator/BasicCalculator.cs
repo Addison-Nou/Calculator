@@ -137,7 +137,7 @@ namespace BasicCalculator
             }
         }
 
-        private double calculate(string left, string right, string op)
+        public double calculate(string left, string right, string op)
         {
             double leftdouble;
             double rightdouble;
@@ -148,10 +148,10 @@ namespace BasicCalculator
                 rightdouble = double.Parse(right);
             }
             catch (OverflowException) { throw new Exception("Value Overflow"); }
-            catch (FormatException) { throw new Exception("Invalid operator"); }
-            catch (ArgumentNullException) { throw new Exception("Null operator"); }
+            catch (FormatException) { throw new Exception("Invalid operand"); }
+            catch (ArgumentNullException) { throw new Exception("Null operand"); }
 
-            double result = 0;
+            double result;
 
             switch (op)
             {
@@ -175,8 +175,10 @@ namespace BasicCalculator
                     {
                         result = leftdouble / rightdouble;
                     }
-
                     break;
+
+                default:
+                    throw new Exception("Invalid operator");
             }
 
             if (result == double.PositiveInfinity)
