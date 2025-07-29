@@ -10,17 +10,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Calculator
+namespace BasicCalculator
 {
 
-    public partial class BasicCalculator : Form
+    public partial class Calculator : Form
     {
         private string left, right, op;
         private bool operatorSet = false; // To keep track of whether we are dealing with the left or right
         private bool decimalSet = false; // To keep track of whether a decimal has already been used
         private List<Tuple<string, string>> calculationHistory = new List<Tuple<string, string>>(); // List of tuples to hold the equation history
 
-        public BasicCalculator(string left, string right, string op)
+        public Calculator(string left, string right, string op)
         {
             InitializeComponent();
             setLeft(left);

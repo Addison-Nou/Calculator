@@ -11,17 +11,17 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Calculator
+namespace RefactoredCalculator
 {
 
-    public partial class RefactoredCalculator : Form
+    public partial class Calculator : Form
     {
         private string input;
         private bool decimalSet; // If the decimal button has been set for the current number
         private bool operatorSet; // If the operator has been set for the current operand
         private List<Tuple<string, string>> calculationHistory = new List<Tuple<string, string>>(); // List of tuples to hold the equation history
 
-        public RefactoredCalculator(string input, bool decimalSet, bool operatorSet)
+        public Calculator(string input, bool decimalSet, bool operatorSet)
         {
             InitializeComponent();
             this.input = input;
@@ -30,7 +30,7 @@ namespace Calculator
         }
 
         // Shunting Yard RPN algorithm to process user input in a way that allows for operator precedence calculation
-        private List<string> shuntingRPNCalc(string input)
+        public List<string> shuntingRPNCalc(string input)
         {
 
             // Regex to validate the input - unnecessary for the UI but I've decided to include it for safety
@@ -94,7 +94,7 @@ namespace Calculator
             return output_queue;
         }
 
-        private double Calculate(List<string> rpnOutput)
+        public double Calculate(List<string> rpnOutput)
         {
             string[] validOperators = { "+", "-", "*", "/" };
             Stack<double> calculationStack = new Stack<double>(); // Stack to hold numbers for calculation
@@ -111,8 +111,18 @@ namespace Calculator
                 }
                 else if (validOperators.Contains(token)) // If the token is a valid operator, pop two numbers from the stack and apply the operator, then push the result to the stack
                 {
-                    double rightOperand = calculationStack.Pop();
-                    double leftOperand = calculationStack.Pop();
+                    double rightOperand;
+                    double leftOperand;
+
+                    try
+                    {
+                        rightOperand = calculationStack.Pop();
+                        leftOperand = calculationStack.Pop();
+                    }
+                    catch (OverflowException) { throw new Exception("Value Overflow"); }
+                    catch (FormatException) { throw new Exception("Invalid operator"); }
+                    catch (ArgumentNullException) { throw new Exception("Null operator"); }
+
 
                     switch (token)
                     {
