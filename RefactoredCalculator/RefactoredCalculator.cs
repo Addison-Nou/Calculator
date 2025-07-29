@@ -94,10 +94,10 @@ namespace Calculator
             return output_queue;
         }
 
-        private float Calculate(List<string> rpnOutput)
+        private double Calculate(List<string> rpnOutput)
         {
             string[] validOperators = { "+", "-", "*", "/" };
-            Stack<float> calculationStack = new Stack<float>(); // Stack to hold numbers for calculation
+            Stack<double> calculationStack = new Stack<double>(); // Stack to hold numbers for calculation
 
             // Iterate through the output queue
             for (int i = 0; i < rpnOutput.Count; i++)
@@ -105,14 +105,14 @@ namespace Calculator
                 string token = rpnOutput[i];
 
                 // If the token is a number, push it onto the stack
-                if (float.TryParse(token, out float number))
+                if (double.TryParse(token, out double number))
                 {
                     calculationStack.Push(number);
                 }
                 else if (validOperators.Contains(token)) // If the token is a valid operator, pop two numbers from the stack and apply the operator, then push the result to the stack
                 {
-                    float rightOperand = calculationStack.Pop();
-                    float leftOperand = calculationStack.Pop();
+                    double rightOperand = calculationStack.Pop();
+                    double leftOperand = calculationStack.Pop();
 
                     switch (token)
                     {
@@ -137,10 +137,10 @@ namespace Calculator
                 } else throw new Exception("Invalid input"); // The token is neither a number nor an operator; the input is (somehow) invalid and got past the regex check
             }
 
-            // Float and double type arithmetic that overflows will return positive or negative infinity as per IEEE 754 standard
-            float result = calculationStack.Pop();
+            // double and double type arithmetic that overflows will return positive or negative infinity as per IEEE 754 standard
+            double result = calculationStack.Pop();
             
-            if (result == float.PositiveInfinity)
+            if (result == double.PositiveInfinity)
             {
                 throw new Exception("Value Overflow");
             }
@@ -152,7 +152,7 @@ namespace Calculator
         {
             try
             {
-                return calculationHistory[index];
+                return calculationHistory[index-1]; // Index must be an integer from 1 to 10
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -179,7 +179,7 @@ namespace Calculator
             for (int i = 0; i < this.calculationHistory.Count; i++)
             {
                 TextBox equation_textbox = new TextBox();
-                equation_textbox.Text = getPreviousResult(i).Item1 + " = " + getPreviousResult(i).Item2;
+                equation_textbox.Text = getPreviousResult(i+1).Item1 + " = " + getPreviousResult(i+1).Item2;
                 equation_textbox.Font = new Font("Microsoft Sans Serif", 16);
                 equation_textbox.TextAlign = HorizontalAlignment.Right;
                 equation_textbox.Size = new System.Drawing.Size(200, 50);
