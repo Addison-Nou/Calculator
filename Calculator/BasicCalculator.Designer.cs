@@ -318,8 +318,8 @@
             this.Controls.Add(this.button_num_8);
             this.Controls.Add(this.button_num_7);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "Calculator";
-            this.Text = "Form1";
+            this.Name = "Basic Calculator";
+            this.Text = "Basic Calculator";
             this.ResumeLayout(false);
             this.PerformLayout();
 
