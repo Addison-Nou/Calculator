@@ -63,3 +63,4 @@ How to run the projects:
 
 How to run the tests:
 1. In the toolbar under 'Test', click 'Run all tests'
+2. Test statuses can be seen by clicking 'Test' -> 'Test Explorer' and switching to the 'Test Explorer' tab.
