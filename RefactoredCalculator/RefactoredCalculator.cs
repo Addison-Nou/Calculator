@@ -33,8 +33,16 @@ namespace RefactoredCalculator
         public List<string> shuntingRPNCalc(string input)
         {
 
-            // Regex to validate the input - unnecessary for the UI but I've decided to include it for safety
+            // Regex to validate the input - unnecessary due to the limited UI but I've decided to include it for safety
             string regex = @"^\s*-?(?:\d+(\.\d*)?|\.\d+)(\s*[\+\-\*/]\s*-?(?:\d+(\.\d*)?|\.\d+))*\s*$";
+
+            // Regex breakdown:
+            // ^                                            beginning line assertion  
+            // \s*                                          allows leading whitespaces
+            // -?                                           allows leading negative sign
+            // (?:\d+(\.\d*)?|\.\d+)                        allows for an integer or a decimal i.e. 5, 5.0, .5
+            // (\s*[\+\-\*/]\s*-?(?:\d+(\.\d*)?|\.\d+))     allows for an operator followed by another number (allowing negative numbers), with optional whitespace around the operator
+            // *\s*$                                        allows for optional ending whitespace and asserts the end of the line
 
             if (!Regex.IsMatch(input, regex))
             {
